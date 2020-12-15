@@ -1,4 +1,24 @@
-<div class="header"></div>
+<div class="header">
+  <form [formGroup]="filterForm">
+    <span class="filter-by">Filter by:</span>
+    <mat-form-field class="select-filter" appearance="outline">
+      <mat-label>Select Company Location</mat-label>
+      <mat-select formControlName="location" (selectionChange)="filterChanged()">
+        <mat-option *ngFor="let location of locations" [value]="location">
+          {{ location }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="select-filter" appearance="outline">
+      <mat-label>Select Company Size</mat-label>
+      <mat-select formControlName="size" (selectionChange)="filterChanged()">
+        <mat-option *ngFor="let size of sizes" [value]="size">
+          {{ size }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
 <div class="body">
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="name">
@@ -26,7 +46,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon aria-label="Example home icon">edit</mat-icon>
+        <mat-icon aria-label="Example home icon" [routerLink]="['/', element._id]">edit</mat-icon>
         <mat-icon aria-label="Example home icon">delete</mat-icon>
       </td>
     </ng-container>
@@ -43,5 +63,5 @@
     showFirstLastButtons
   ></mat-paginator>
 
-  <button mat-raised-button color="primary">Add new</button>
+  <button mat-raised-button color="primary" [routerLink]="['/', 0]">Add new</button>
 </div>

@@ -21,8 +21,18 @@ let employee = new Schema(
       required: true,
     },
     company: {
-      type: String,
-      required: true,
+      name: {
+        type: String,
+        required: true,
+      },
+      size: {
+        type: String,
+        required: true,
+      },
+      location: {
+        type: String,
+        required: true,
+      },
     },
   },
   { collection: "employee" }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainLayoutComponent } from './common/main-layout/main-layout.component'
 import { EmployeeIndexComponent } from './employee/pages/employee-index/employee-index.component';
+import { EmployeeDetailsComponent } from './employee/pages/employee-details/employee-details.component';
 
 const routes: Routes = [
     {
@@ -12,8 +13,11 @@ const routes: Routes = [
             // default
             { path: '', component: EmployeeIndexComponent },
 
+            { path: ':id', component: EmployeeDetailsComponent },
+
             // Home
-            { path: 'home', component: EmployeeIndexComponent },
+            { path: 'employee', component: EmployeeIndexComponent },
+            { path: 'employee/:id', component: EmployeeDetailsComponent },
 
         ],
     },
