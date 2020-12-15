@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "CXLavender apis",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prasademc/cxLavender.git"
+  },
+  "keywords": [
+    "test",
+    "CX",
+    "CXLavender"
+  ],
+  "author": "chaminda egall",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prasademc/cxLavender/issues"
+  },
+  "homepage": "https://github.com/prasademc/cxLavender#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8",
+    "nodemon": "^2.0.6"
+  }
+}

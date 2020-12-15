@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Macrohard Corporation",
+        "size": "Large",
+        "location": "Sydney"
+    }, 
+    {
+        "name": "Acme Corporation",
+        "size": "Medium",
+        "location": "Melbourne"
+    },
+    {
+        "name": "Boogle",
+        "size": "Small",
+        "location": "Brisbane"
+    },
+    {
+        "name": "Tequila Mockingbird",
+        "size": "Large",
+        "location": "Sydney"
+    },
+    {
+        "name": "Amigone Funeral Home",
+        "size": "Medium",
+        "location": "Melbourne"
+    },
+    {
+        "name": "CXTX",
+        "size": "Small",
+        "location": "Perth"
+    },
+    {
+        "name": "CX Lavender",
+        "size": "Medium",
+        "location": "Sydney"
+    }
+]
