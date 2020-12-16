@@ -5,4 +5,12 @@
   justify-content: flex-start;
   align-items: center;
   background-color: #424242;
+
+  .employee-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #424242;
+  }
 }

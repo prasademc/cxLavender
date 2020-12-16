@@ -1,1 +1,22 @@
-
+<div class="employee-detail">
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input type="text" matInput formControlName="name" placeholder="Name" />
+  </mat-form-field>
+  <mat-form-field class="select-filter" appearance="outline">
+    <mat-label>Age</mat-label>
+    <input type="text" matInput formControlName="age" placeholder="Age" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="age" placeholder="Email" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Select Company Location</mat-label>
+    <mat-select formControlName="location" (selectionChange)="filterChanged()">
+      <mat-option *ngFor="let company of companies" [value]="company.id">
+        {{ company.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
