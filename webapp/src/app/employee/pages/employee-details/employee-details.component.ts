@@ -45,8 +45,9 @@ export class EmployeeDetailsComponent implements OnInit {
     this.loadCompanies();
   }
 
-  filterChanged() {}
-
+  /**
+   * @description Update existing employee details
+   */
   updateEmployee() {
     const selectedCompany = this.companies.filter(
       (company) => company.name === this.employeeForm.value.company
@@ -80,6 +81,9 @@ export class EmployeeDetailsComponent implements OnInit {
     );
   }
 
+  /**
+   * @description create new employee
+   */
   createEmployee() {
     const selectedCompany = this.companies.filter(
       (company) => company.name === this.employeeForm.value.company
@@ -113,12 +117,21 @@ export class EmployeeDetailsComponent implements OnInit {
     );
   }
 
+  // private methods
+
+  /**
+   * @description get all the companies
+   */
   private loadCompanies(): void {
     this.companyService.getAllCompanies().subscribe((data) => {
       this.companies = data;
     });
   }
 
+  /**
+   * @description get employee by it's id
+   * @param id
+   */
   private getEmployee(id: String) {
     this.employeeService.getEmployeeById(id).subscribe((data) => {
       this.employeeForm.patchValue({
@@ -132,6 +145,9 @@ export class EmployeeDetailsComponent implements OnInit {
     });
   }
 
+  /**
+   * @description initialize the employee form
+   */
   private initFilterForm(): void {
     // filter form
     this.employeeForm = this.fb.group({
@@ -143,10 +159,18 @@ export class EmployeeDetailsComponent implements OnInit {
     });
   }
 
+  /**
+   * @description Success message
+   * @param msg
+   */
   private success(msg: string) {
     this.snackbarService.success(msg);
   }
 
+  /**
+   * @description Error message
+   * @param errorResponse
+   */
   private error(errorResponse: string) {
     this.snackbarService.error(errorResponse);
   }

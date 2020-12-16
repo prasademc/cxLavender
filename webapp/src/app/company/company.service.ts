@@ -15,6 +15,9 @@ export class CompanyService {
     this.apiEndpoint = environment.apiEndpoint + 'companies';
   }
 
+  /**
+   * @description Get all companies
+   */
   getAllCompanies(): Observable<Company[]> {
     return this.httpClient.get<Company[]>(this.apiEndpoint);
   }

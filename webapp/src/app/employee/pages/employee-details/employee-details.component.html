@@ -25,7 +25,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Select Company</mat-label>
-      <mat-select formControlName="company" (selectionChange)="filterChanged()">
+      <mat-select formControlName="company">
         <mat-option *ngFor="let company of companies" [value]="company.name">
           {{ company.name }}
         </mat-option>

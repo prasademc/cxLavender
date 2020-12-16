@@ -53,6 +53,9 @@ export class EmployeeIndexComponent implements OnInit {
     this.initFilterForm();
   }
 
+  /**
+   * @description Filter employees table
+   */
   filterEmployee() {
     let filter = new Filter();
     filter.location = this.filterForm.value.location;
@@ -66,6 +69,11 @@ export class EmployeeIndexComponent implements OnInit {
       });
   }
 
+  /**
+   * @description  Delete employee by id
+   * @param name
+   * @param id
+   */
   deleteEmployee(name: string, id: string) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '580px',
@@ -90,6 +98,11 @@ export class EmployeeIndexComponent implements OnInit {
     });
   }
 
+  // Private mothods
+
+  /**
+   * @description Get all the employees
+   */
   private loadEmployees(): void {
     this.employeeService.getAllEmployees().subscribe((data) => {
       this.dataSource = new MatTableDataSource<Employee>(data);
@@ -97,6 +110,9 @@ export class EmployeeIndexComponent implements OnInit {
     });
   }
 
+  /**
+   * @description Get all the companies
+   */
   private loadCompanies(): void {
     this.companyService.getAllCompanies().subscribe((data) => {
       this.locations = [...new Set(data.map((company) => company.location))];
@@ -104,7 +120,9 @@ export class EmployeeIndexComponent implements OnInit {
     });
   }
 
-  // private methods
+  /**
+   * @description initialize the filter form
+   */
   private initFilterForm(): void {
     // filter form
     this.filterForm = this.fb.group({
@@ -115,10 +133,18 @@ export class EmployeeIndexComponent implements OnInit {
     });
   }
 
+  /**
+   * @description Success message
+   * @param msg
+   */
   private success(msg: string) {
     this.snackbarService.success(msg);
   }
 
+  /**
+   * @description Error message
+   * @param errorResponse
+   */
   private error(errorResponse: string) {
     this.snackbarService.error(errorResponse);
   }
