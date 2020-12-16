@@ -7,10 +7,17 @@
   background-color: #424242;
 
   .employee-detail {
+    width: 600px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     background-color: #424242;
+    padding: 40px;
+
+    & > .mat-form-field {
+      width: 100% !important;
+      margin: 0 !important;
+    }
   }
 }

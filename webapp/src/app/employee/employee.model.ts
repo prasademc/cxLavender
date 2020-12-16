@@ -1,6 +1,6 @@
 import { Company } from '../company/company.model'
 
-export interface Employee {
+export class Employee {
   id: string;
   fname: string;
   lname: string;

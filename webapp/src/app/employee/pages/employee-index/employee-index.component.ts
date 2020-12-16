@@ -1,20 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/internal/operators/map';
-import { finalize, catchError } from 'rxjs/operators';
-
 // angular material
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 
 // Import services
 import { EmployeeService } from '../../employee.service';
 import { CompanyService } from '../../../company/company.service';
+import { SnackbarService } from '../../../common/services/snacker.service';
 
+// Import models
 import { Employee } from '../../employee.model';
-import { Company } from '../../../company/company.model';
+
+// Import components
+import { ConfirmComponent } from '../../../common/confirm/confirm.component';
+import { Filter } from 'src/app/common/models/filter.model';
 
 @Component({
   selector: 'app-employee-index',
@@ -33,14 +35,16 @@ export class EmployeeIndexComponent implements OnInit {
 
   @ViewChild('paginator') paginator: MatPaginator;
 
-  locations: String[] = [];
+  locations: string[] = [];
 
-  sizes: String[] = [];
+  sizes: string[] = [];
 
   constructor(
     private employeeService: EmployeeService,
     private companyService: CompanyService,
-    private fb: FormBuilder
+    private snackbarService: SnackbarService,
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -49,9 +53,40 @@ export class EmployeeIndexComponent implements OnInit {
     this.initFilterForm();
   }
 
-  filterChanged() {
-    this.dataSource.data = this.dataSource.data.filter(employee => {
-      console.log(employee.company.location)
+  filterEmployee() {
+    let filter = new Filter();
+    filter.location = this.filterForm.value.location;
+    filter.size = this.filterForm.value.size;
+
+    this.employeeService
+      .filterEmployeesByCompanyLocationAndSize(filter)
+      .subscribe((data) => {
+        this.dataSource = new MatTableDataSource<Employee>(data);
+        this.dataSource.paginator = this.paginator;
+      });
+  }
+
+  deleteEmployee(name: string, id: string) {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '580px',
+      data: { name: name },
+    });
+
+    // dialog close event handler
+    dialogRef.afterClosed().subscribe((isConfirmed) => {
+      if (isConfirmed === true) {
+        this.employeeService.deleteEmployee(id).subscribe(
+          (data) => {
+            const msg = `Employee ${name} has been deleted successfully`;
+            this.success(msg);
+            this.loadEmployees();
+          },
+          (error) => {
+            const err = `Error occurred while deleting employee ${name}`;
+            this.error(err);
+          }
+        );
+      }
     });
   }
 
@@ -63,12 +98,10 @@ export class EmployeeIndexComponent implements OnInit {
   }
 
   private loadCompanies(): void {
-    this.companyService.getAllCompanies().subscribe(
-      data => {
-        this.locations = data.map(company => company.location);
-        this.sizes = data.map(company => company.size)
-      }
-    );
+    this.companyService.getAllCompanies().subscribe((data) => {
+      this.locations = [...new Set(data.map((company) => company.location))];
+      this.sizes = [...new Set(data.map((company) => company.size))];
+    });
   }
 
   // private methods
@@ -80,5 +113,13 @@ export class EmployeeIndexComponent implements OnInit {
       pageIndex: [0, Validators.required],
       pageSize: [10, Validators.required],
     });
+  }
+
+  private success(msg: string) {
+    this.snackbarService.success(msg);
+  }
+
+  private error(errorResponse: string) {
+    this.snackbarService.error(errorResponse);
   }
 }

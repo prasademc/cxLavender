@@ -13,9 +13,9 @@ table {
 }
 
 .mat-column-action {
-  width: 100px;
+  width: 120px;
   padding-right: 0px !important;
-  & > .mat-icon {
+  & > .mat-mini-fab {
     margin: 0px  10px;
   }
 }

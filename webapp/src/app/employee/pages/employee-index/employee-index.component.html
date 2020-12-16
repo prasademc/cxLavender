@@ -3,7 +3,9 @@
     <span class="filter-by">Filter by:</span>
     <mat-form-field class="select-filter" appearance="outline">
       <mat-label>Select Company Location</mat-label>
-      <mat-select formControlName="location" (selectionChange)="filterChanged()">
+      <mat-select
+        formControlName="location"
+      >
         <mat-option *ngFor="let location of locations" [value]="location">
           {{ location }}
         </mat-option>
@@ -11,12 +13,15 @@
     </mat-form-field>
     <mat-form-field class="select-filter" appearance="outline">
       <mat-label>Select Company Size</mat-label>
-      <mat-select formControlName="size" (selectionChange)="filterChanged()">
+      <mat-select formControlName="size">
         <mat-option *ngFor="let size of sizes" [value]="size">
           {{ size }}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <button mat-mini-fab (click)="filterEmployee()">
+      <mat-icon>search</mat-icon>
+    </button>
   </form>
 </div>
 <div class="body">
@@ -46,8 +51,12 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon aria-label="Example home icon" [routerLink]="['/', element._id]">edit</mat-icon>
-        <mat-icon aria-label="Example home icon">delete</mat-icon>
+        <button mat-mini-fab [routerLink]="['/', element._id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab (click)="deleteEmployee(element.fname, element._id)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -63,5 +72,7 @@
     showFirstLastButtons
   ></mat-paginator>
 
-  <button mat-raised-button color="primary" [routerLink]="['/', 0]">Add new</button>
+  <button mat-raised-button color="primary" [routerLink]="['/', '0']">
+    Add new
+  </button>
 </div>

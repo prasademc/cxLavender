@@ -1,22 +1,37 @@
-<div class="employee-detail">
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input type="text" matInput formControlName="name" placeholder="Name" />
-  </mat-form-field>
-  <mat-form-field class="select-filter" appearance="outline">
-    <mat-label>Age</mat-label>
-    <input type="text" matInput formControlName="age" placeholder="Age" />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Email</mat-label>
-    <input type="email" matInput formControlName="age" placeholder="Email" />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Select Company Location</mat-label>
-    <mat-select formControlName="location" (selectionChange)="filterChanged()">
-      <mat-option *ngFor="let company of companies" [value]="company.id">
-        {{ company.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+<form [formGroup]="employeeForm" autocomplete="off">
+  <div class="employee-detail">
+    <h1 *ngIf="!isEmployee">{{"Add Employee"}}</h1>
+    <h1 *ngIf="isEmployee">{{"Edit Employee"}}</h1>
+    <mat-form-field appearance="outline">
+      <mat-label>FIrst Name</mat-label>
+      <input type="text" matInput formControlName="fname" placeholder="First Name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input type="text" matInput formControlName="lname" placeholder="Last Name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Age</mat-label>
+      <input type="text" matInput formControlName="age" placeholder="Age" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="email"
+        placeholder="Email"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Select Company</mat-label>
+      <mat-select formControlName="company" (selectionChange)="filterChanged()">
+        <mat-option *ngFor="let company of companies" [value]="company.name">
+          {{ company.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button *ngIf="isEmployee" mat-raised-button color="primary" (click)="updateEmployee()">Update</button>
+    <button *ngIf="!isEmployee" mat-raised-button color="primary" (click)="createEmployee()">Create</button>
+  </div>
+</form>

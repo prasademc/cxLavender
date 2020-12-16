@@ -8,16 +8,17 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 // Import Shared
 import { MaterialModule } from './material.module';
-// routing module
 import { AppRoutingModule } from './app-routing.module';
+import { SnackbarService } from './common/services/snacker.service';
 
 // Components
 import { MainLayoutComponent } from './common/main-layout/main-layout.component';
 import { EmployeeIndexComponent } from './employee/pages/employee-index/employee-index.component';
 import { EmployeeDetailsComponent } from './employee/pages/employee-details/employee-details.component';
+import { ConfirmComponent } from './common/confirm/confirm.component';
 
 @NgModule({
-  declarations: [AppComponent, MainLayoutComponent, EmployeeIndexComponent, EmployeeDetailsComponent],
+  declarations: [AppComponent, MainLayoutComponent, EmployeeIndexComponent, EmployeeDetailsComponent, ConfirmComponent],
   imports: [
     BrowserModule,
     NoopAnimationsModule,
@@ -27,7 +28,9 @@ import { EmployeeDetailsComponent } from './employee/pages/employee-details/empl
     ReactiveFormsModule,
     MaterialModule,
   ],
-  providers: [],
+  providers: [
+    SnackbarService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
