@@ -2,8 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config({ path: "../.env" });
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
+
+//Middlewares
+app.use(cors());
 app.use(bodyParser.json());
 
 // Import routes
@@ -22,12 +26,6 @@ const connection = mongoose.connection;
 
 connection.once("open", function () {
   console.log("MongoDB database connection established successfully");
-});
-
-app.use(function (request, response, next) {
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
 });
 
 app.listen(4300, () => {
